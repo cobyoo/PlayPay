@@ -1,0 +1,229 @@
+{% block title %}
+
+<title>Play Pay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+<nav class="navbar  navbar-expand-sm  bg-dark  navbar-dark"> 
+  <a class="navbar-brand" href="/"><h2>Play Pay</h2></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    {% if not request.session.login %}
+      <li class="nav-item active">
+        <a class="nav-link" href={% url 'proj:login' %}>로그인 <span class="sr-only">(current)</span></a>
+      </li>
+    {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href={% url 'proj:logout' %}>로그아웃 <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href={% url 'proj:edit' %}>정보수정</a>
+      </li>
+    {% endif %}
+
+      <li class="nav-item">
+        <a class="nav-link" href={% url 'proj:pclist' %}>PC방 찾기</a>
+      </li>
+
+      {% if request.session.name == '관리자' %}
+
+      <li class="nav-item">
+        <a class="nav-link" href={% url 'proj:boardmanage' %}>게시판 관리</a>
+      </li>
+      {% endif %}
+
+      <li class="nav-item">
+        <a class="nav-link" href={% url 'proj:food' %}>메뉴 추천</a>
+      </li>
+
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          게시판
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href={% url 'proj:contentlist' 1 %}>리뷰 게시판</a>
+          <a class="dropdown-item" href={% url 'proj:contentlist' 2 %}>공지사항</a>
+        </div>
+      </li>
+
+<li class="nav-item dropdown">
+        <a class="nav-link disabled" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         설정
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href={% url 'proj:setting' %}>PC시간 설정</a>
+        </div>
+      </li>
+
+
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+    <font color='white'>
+    {% if request.session.name %}
+    <a>이름 : {{ request.session.name }} //</a>
+    {% else %}
+    이름 : None //
+    {% endif %}
+    {% if request.session.time %}
+    <a>잔여시간 : {{ request.session.time }}분</a>
+    {% else %}
+    <a>잔여시간 : None </a>
+    {% endif %}
+    </font>
+    <a class="nav-link" href={% url 'proj:payment' %} style="color:#FF8868">충전</a>
+    <a class="nav-link" href={% url 'proj:refund' %} style="color:#FF8868">환불</a>
+    </form>
+
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0"> 
+      
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> 
+    </script> 
+      
+    <style>    
+        h1{ 
+        color: #32a852; 
+        } 
+        .mode { 
+            float:left; 
+        } 
+        .change { 
+            cursor: pointer; 
+            border: 1px solid #555; 
+            border-radius: 40%; 
+            width: 20px; 
+            text-align: center; 
+            padding: 5px; 
+            margin-rights: 8px; 
+        } 
+        .dark{ 
+            background-color: #222; 
+            color: #ffffff; 
+        } 
+    </style> 
+</head> 
+ <style>
+  ap{
+    color: #ffffff;
+  }
+ </style> 
+<body> 
+    <div class="mode"> 
+        <ap>Dark mode: </ap><span class="change">🌓</span> 
+    </div> 
+        
+    <script> 
+        $( ".change" ).on("click", function() { 
+            if( $( "body" ).hasClass( "dark" )) { 
+                $( "body" ).removeClass( "dark" ); 
+            } else { 
+                $( "body" ).addClass( "dark" ); 
+            } 
+        }); 
+    </script> 
+</body> 
+</nav>
+
+
+<!-- Channel Plugin Scripts -->
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var d = window.document;
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "8badb9d9-3049-487c-b0e3-c919c17c281b"
+  });
+</script>
+<!-- End Channel Plugin -->
+
+<style>
+
+<style tyle="text/css">
+#wrapper {
+	position:relative;
+
+  min-height:100%;
+}
+#footer {
+
+    position:fixed;
+
+    bottom:0;
+
+    width:100%;
+
+    height:150px;   
+
+    background-color:#525864;
+
+}
+
+#color {color: #ffffffaa;}
+
+
+
+
+</style>
+
+
+<div id="wrapper">
+    <div id="footer"><pre>
+    
+    <div id="color">
+                                                              <b>팀 명</b> 사과파이     <b>팀장</b> 유승현     <b>팀원</b> 이상훈
+                                                              <b>주소</b> 충청북도 충주시 대소원면 대학로 50(한국교통대학교) 중앙정보관      TEL 010-1234-5678
+                                                              COPYRIGHT 2020. APPLEPIE. ALL RIGHTS RESERVED.</div>
+    </pre></div>
+
+</div>
+
+
+
+{% endblock %}
+
+{% block content %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "Proj/main.html" %}
+{% block content %}
+<style>
+#login .container #login-row #login-column #login-box {
+  margin-top: 140px;
+  max-width: 600px;
+  height: 260px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+</style>
+
+<form action="{% url 'proj:boardmanage' %}" method='post'>
+    {% csrf_token %}
+        <div id="login">
+ <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post" style="text-align:center"><br>
+                            <h3 class="text-center text-info">게시판 관리</h3>
+                            <form action="{% url 'proj:boardmanage' %}" method='post' >
+                                {% csrf_token %}<br>
+
+                                {% for field in form %}
+                                <div class="form-group">
+                                    <input type="{{field.field.widget.input_type}}" class="form-control" id="{{field.id_for_label}}" 
+                                        placeholder="{{field.label}}" name="{{field.name}}">
+                                </div>
+                            {% endfor %}  
+                                <input type='submit' class='btn btn-warning' value='게시판 생성' />
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+                        
+</form>
+{% endblock %}

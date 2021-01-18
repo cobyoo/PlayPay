@@ -1,0 +1,75 @@
+{% extends "Proj/main.html" %}
+{% block content %}
+<style>
+#login .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  max-width: 600px;
+  height: 300px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+</style>
+<body>
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post" style="text-align:center">
+                            <h2 class="text-center text-info">{{ data.text_title }}</h2>
+                            {% if data %}
+                            <hr>
+                            <h3>{{ data.content }}</h3><br>
+                            {% if bn == 1 %}
+                            별점 : 
+                            {% if data.star == 1 %}
+                            ★
+                            {% elif data.star == 2 %}
+                            ★★
+                            {% elif data.star == 3 %}
+                            ★★★
+                            {% elif data.star == 4 %}
+                            ★★★★
+                            {% elif data.star == 5 %}
+                            ★★★★★
+                            {% else %}
+                            None
+                            {% endif %}<br>
+                                {% for tag in data.tags.all %}
+                                    {% if tag.id != 6 %}  <!-- "tag.id = 6" == blank tag id -->
+                                        <span class="badge badge-dark">
+                                            #{{ tag.name }}
+                                        </span>
+                                    {% else %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            {% else %}
+                            <p>No Contents !!!</p>
+                            {% endif %}<hr>    
+                    {% if request.session.my_id == 'admin@admin.admin' %}
+                        <a href="/board/{{bn}}/{{tn}}/delete/">삭제하기</a><br>
+                    {% else %}
+                        {% if request.session.my_id == data.user %}
+                            <a href="/board/{{bn}}/{{tn}}/delete/">삭제하기</a><br>
+                        {% endif %}
+                    {% endif %}
+                    <a href="/board/{{bn}}/">뒤로가기</a>
+                    </div>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+{% endblock %}

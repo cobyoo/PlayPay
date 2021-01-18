@@ -1,0 +1,126 @@
+{% extends "Proj/base.html" %}
+{% block content %}
+<style>
+  .carousel-inner > .carousel-item > img {
+    margin: auto;
+  }
+
+  .popup{
+    :50%;
+  }
+
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+    
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */                          
+  }    
+</style>
+{% if  not request.session.login %}
+<script src="https://code.jquery.com/jquery-latest.js"></script> 
+ 
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">안내문</span></b></span></p>
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">PLAY PAY입니다.</span></p>
+                <p style="text-align: center; line-height: 1.5;"><b><span style="color: rgb(255, 0, 0); font-size: 14pt;">한국교통대학교 PC방 찾기 및 결제 사이트입니다</span></b></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">많은 이용 부탁드립니다.</span></p>
+                <!--<p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">이용에 불편을 드린 점 양해를 </span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">부탁드립니다.</span></p>-->
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
+                <span class="pop_bt" style="font-size: 13pt;" >
+                     닫기
+                </span>
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
+ 
+ 
+    <script type="text/javascript">
+      
+        jQuery(document).ready(function() {
+                $('#myModal').show();
+        });
+        //팝업 Close 기능
+        function close_pop(flag) {
+             $('#myModal').hide();
+        };
+        
+      </script>
+{% endif %}
+{% if request.session.time <= 30 %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+</head>
+<body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <div id="myMoney"></div>
+  <div class="popup">
+  <script>
+      jQuery(document).ready(function(){
+        $('#myMoney').show();
+    });
+    {
+      toastr.options.escapeHtml = true;
+      toastr.options.closeButton = true;
+      toastr.options.newestOnTop = false;
+      toastr.options.progressBar = true;
+      toastr.info('PC방 이용시간이 부족합니다', '충전 알림', {timeOut: 10000});
+    };
+  
+  </script>
+</div>
+</body>
+</html>
+{% endif %}
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block" src="/media/main1.jpg" alt="First slide" style="width: auto;">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block" src="/media/main2.jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block" src="/media/main3.jpg" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+{% endblock %}

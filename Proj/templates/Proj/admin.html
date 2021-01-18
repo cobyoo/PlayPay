@@ -1,0 +1,9 @@
+{% extends "Proj/main.html" %}
+{% block content %}
+<form action="{% url 'proj:admin' %}" method='post'>
+    {% csrf_token %}
+    <h2>Admin</h2>
+    {{ form.as_p }}
+    <input type='submit' value='정보수정' />
+</form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "Proj/main.html" %}
+{% block content %}
+<form action="{% url 'proj:choose' %}" method='post'>
+    {% csrf_token %}
+    <h2>회원가입</h2>
+    {{ form.as_p }}
+    <input type='submit' value='회원가입' />
+</form>
+<a href="" onclick="window.open('/maps/skybridge/', 'window popup', 'width=500, height=500, menubar=no, status=no, toolbar=no');">테스트하기</a>
+{% endblock %}

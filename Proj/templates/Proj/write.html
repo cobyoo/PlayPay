@@ -1,0 +1,36 @@
+{% extends "Proj/base.html" %}
+{% block content %}
+<style>
+    #write{
+        margin: 30px;
+    }
+</style>
+<div id='write'>
+<form action="{% url 'proj:write' %}" method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if request.session.my_id == 'admin@admin.admin' %}
+    별점(리뷰 작성 시): 
+        <input type='number' name='star_' min='0' max='5' value='0'><br><br>
+    {% endif %}
+    <input type='submit' class='btn btn-secondary' value='글쓰기' onclick="clickEvent();"/>
+</form>
+<script>
+function clickEvent(){
+    var form= document.forms.popupForm;  
+
+    $.ajax({
+        url: "/board/write/",
+        data: form,
+        method: "POST",
+        datatype: "json"
+        })
+
+    .always(function(json) {
+        window.opener.location.reload();
+        self.close();
+    })
+}
+</script>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "Proj/main.html" %}
+{% block content %}
+<h2>Board List</h2>
+<!--
+{% if object_list %}
+    <ul>
+    {% for board in object_list %}
+        <li><a href="{% url 'proj:contentlist' board.boardnum %}">{{ board.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Board Messages !!!</p>
+{% endif %}
+-->
+{% for board in boarddata %}
+    <li><a href="{% url 'proj:contentlist' board.boardnum %}">{{ board.title }}</a></li>
+{% endfor %}
+
+{% endblock %}

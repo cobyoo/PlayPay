@@ -1,0 +1,97 @@
+{% extends "Proj/base.html" %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% block content %}
+<style>
+#login .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  max-width: 600px;
+  height: 250px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+</style>
+<body>
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post" style="text-align:center">
+                            <h3 class="text-center text-info">Can I help you??</h3>
+                            <form action="{% url 'proj:food' %}" method='post' >
+                                {% csrf_token %}<br><br>
+                                <h2>
+                                {% if food == 0 %}
+                                    갈비만두
+                                {% elif food == 1 %}
+                                    감자튀김
+                                {% elif food == 2 %}
+                                    떡볶이
+                                {% elif food == 3 %}
+                                    레몬에이드
+                                {% elif food == 4 %}
+                                    불닭볶음면
+                                {% elif food == 5 %}
+                                    소떡소떡
+                                {% elif food == 6 %}
+                                    수제소시지
+                                {% elif food == 7 %}
+                                    스프라이트
+                                {% elif food == 8 %}
+                                    슬라이스 치즈
+                                {% elif food == 9 %}
+                                    신라면
+                                {% elif food == 10 %}
+                                    아메리카노
+                                {% elif food == 11 %}
+                                    자몽에이드
+                                {% elif food == 12 %}
+                                    제육덮밥
+                                {% elif food == 13 %}
+                                    짜파게티
+                                {% elif food == 14 %}
+                                    참치김밥
+                                {% elif food == 15 %}
+                                    청포도에이드
+                                {% elif food == 16 %}
+                                    치킨마요덮밥
+                                {% elif food == 17 %}
+                                    코카콜라
+                                {% elif food == 18 %}  
+                                    펩시
+                                {% elif food == 19 %}
+                                    포스틱
+                                {% elif food == 20 %}
+                                    포카칩
+                                {% elif food == 21 %}
+                                    핫도그
+                                {% elif food == 22 %}
+                                    핫바
+                                {% elif food == 23 %}
+                                    햇반
+                                {% elif food == 24 %}
+                                    허니버터칩
+                                {% elif food == 25 %}
+                                    홈런볼
+                                {% endif %}
+                                </h2>
+                                <br>
+
+                                <a href="/food/">뒤로가기</a>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

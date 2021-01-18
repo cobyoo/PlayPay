@@ -1,0 +1,297 @@
+{% extends "Proj/base.html" %}
+{% block content %}
+<style>
+#img { 
+    text-align: center; 
+    margin: 120px;
+    }
+</style>
+<div id='img'>
+<a onclick="open_pop1();"><img src="/media/fox.jpg" width="200" height="200" data-toggle="tooltip" data-placement="bottom" title="팍스 pc방"></a>
+<a onclick="open_pop2();"><img src="/media/ghostcastle.jpg" width="200" height="200" data-toggle="tooltip" data-placement="bottom" title="고스트캐슬 pc방"></a>
+<a onclick="open_pop3();"><img src="/media/lime.jpg" width="200" height="200" data-toggle="tooltip" data-placement="bottom" title="라임 pc방"></a><br>
+<a onclick="open_pop4();"><img src="/media/ocelot.jpg" width="200" height="200" data-toggle="tooltip" data-placement="bottom" title="오셀롯 pc방"></a>
+<a onclick="open_pop5();"><img src="/media/3pop.png" width="200" height="200" data-toggle="tooltip" data-placement="bottom" title="3pop pc방"></a>
+<a onclick="open_pop6();"><img src="/media/skybridge.jpg" width="200" height="200" data-toggle="tooltip" data-placement="bottom" title="하늘다리 pc방"></a>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-latest.js"></script> 
+ 
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 0; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: hidden; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */                          
+        }
+ 
+</style>
+    <!-- The Modal -->
+    <div id="myModal1" class="modal">
+        
+      <!-- 팍스 피시방 Modal content -->
+      <div class="modal-content">
+          
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 20pt;">팍스 PC방</span></b></span></p>
+                <p style="text-align: center; line-height: 1.0;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><b><span style="font-size: 14pt;">PC 사양</span></b></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">CPU : i5-9600K</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">VGA : RTX 2070</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">RAM : 16GB</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">MONITOR : 삼성 43인치 UHD TV UN43KU7000 </span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">회원정액제</span></p>
+                <div style="text-align: center;">
+                <img src="/media/pop.jpg" width="150" height="150"></div>
+                <a href="{% url 'proj:maps' name1 %}">pc방 위치</a>
+                
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop1();">
+                <span class="pop_bt" style="font-size: 14pt;" >
+                     닫기
+                </span>
+                
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
+       
+    <script type="text/javascript">
+        function open_pop1(flag) {
+            $('#myModal1').show();
+        };
+        //팝업 Close 기능
+        function close_pop1(flag) {
+             $('#myModal1').hide();
+        };
+
+      </script>
+
+</style>
+    <!-- The Modal -->
+    <div id="myModal2" class="modal">
+        
+      <!-- 고스트캐슬 Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 20pt;">고스트캐슬 PC방</span></b></span></p>
+                <p style="text-align: center; line-height: 1.0;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><b><span style="font-size: 14pt;">PC 사양</span></b></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">CPU : i5-4690</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">VGA : RTX 2060</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">RAM : 16GB</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">MONITOR : Benq 2720(144hz)</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">회원정액제</span></p>
+                <div style="text-align: center;">
+                <img src="/media/pop.jpg" width="150" height="150"></div>
+                <a href="{% url 'proj:maps' name2 %}">pc방 위치</a>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop2();">
+                <span class="pop_bt" style="font-size: 14pt;" >
+                     닫기
+                </span>
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
+ 
+ 
+    <script type="text/javascript">
+      
+        function open_pop2(flag) {
+            $('#myModal2').show();
+        };
+        //팝업 Close 기능
+        function close_pop2(flag) {
+             $('#myModal2').hide();
+        };
+        
+      </script>
+
+
+
+</style>
+    <!-- The Modal -->
+    <div id="myModal3" class="modal">
+        
+      <!-- 라임피시방 Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 20pt;">라임 PC방</span></b></span></p>
+                <p style="text-align: center; line-height: 1.0;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><b><span style="font-size: 14pt;">PC 사양</span></b></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">CPU : i5-4690</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">VGA : GTX 1080</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">RAM : 32GB</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">MONITOR : 21:9 200Hz/165Hz</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">회원정액제</span></p>
+                <div style="text-align: center;">
+                <img src="/media/pop.jpg" width="150" height="150"></div>
+                <a href="{% url 'proj:maps' name3 %}">pc방 위치</a>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop3();">
+                <span class="pop_bt" style="font-size: 14pt;" >
+                     닫기
+                </span>
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
+ 
+ 
+    <script type="text/javascript">
+      
+         function open_pop3(flag) {
+            $('#myModal3').show();
+        };
+        //팝업 Close 기능
+        function close_pop3(flag) {
+             $('#myModal3').hide();
+        };
+        
+      </script>
+
+</style>
+    <!-- The Modal -->
+    <div id="myModal4" class="modal">
+        
+      <!-- 오셀롯 Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 20pt;">오셀롯 PC방</span></b></span></p>
+                <p style="text-align: center; line-height: 1.0;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><b><span style="font-size: 14pt;">PC 사양</span></b></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">CPU : i7-8400</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">VGA : GTX 1080</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">RAM : 32GB</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">MONITOR : 게이밍 165Hz 배그 모니터</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">회원정액제</span></p>
+                <div style="text-align: center;">
+                <img src="/media/pop.jpg" width="150" height="150"></div>
+                <a href="{% url 'proj:maps' name4 %}">pc방 위치</a>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop4();">
+                <span class="pop_bt" style="font-size: 14pt;" >
+                     닫기
+                </span>
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
+ 
+ 
+    <script type="text/javascript">
+      
+         function open_pop4(flag) {
+            $('#myModal4').show();
+        };
+        //팝업 Close 기능
+        function close_pop4(flag) {
+             $('#myModal4').hide();
+        };
+        
+      </script>
+
+
+</style>
+    <!-- The Modal -->
+    <div id="myModal5" class="modal">
+        
+      <!-- 3pop Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 20pt;">3pop PC방</span></b></span></p>
+                <p style="text-align: center; line-height: 1.0;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><b><span style="font-size: 14pt;">PC 사양</span></b></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">CPU : i5-4670</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">VGA : GTX 660/760</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">RAM : 32GB</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">MONITOR : LG 21:9 34인치 144Hz 울트라와이드 모니터</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">회원정액제</span></p>
+                <div style="text-align: center;">
+                <img src="/media/pop.jpg" width="150" height="150"></div>
+                <a href="{% url 'proj:maps' name5 %}">pc방 위치</a>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop5();">
+                <span class="pop_bt" style="font-size: 14pt;" >
+                     닫기
+                </span>
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
+ 
+ 
+    <script type="text/javascript">
+      
+        function open_pop5(flag) {
+            $('#myModal5').show();
+        };
+        //팝업 Close 기능
+        function close_pop5(flag) {
+             $('#myModal5').hide();
+        };
+        
+      </script>      
+
+ 
+</style>
+    <!-- The Modal -->
+    <div id="myModal6" class="modal">
+        
+      <!-- Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 20pt;">하늘다리 PC방</span></b></span></p>
+                <p style="text-align: center; line-height: 1.0;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><b><span style="font-size: 14pt;">PC 사양</span></b></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">CPU : i5-4690</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">VGA : GTX 960 2GB</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">RAM : 16GB</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">MONITOR : 화이트 144Hz 모니터</span></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;">회원정액제</span></p>
+                <div style="text-align: center;">
+                <img src="/media/pop.jpg" width="150" height="150"></div>
+                <a href="{% url 'proj:maps' name6 %}">pc방 위치</a>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop6();">
+                <span class="pop_bt" style="font-size: 14pt;" >
+                     닫기
+                </span>
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
+ 
+ 
+    <script type="text/javascript">
+      
+          function open_pop6(flag) {
+            $('#myModal6').show();
+        };
+        //팝업 Close 기능
+        function close_pop6(flag) {
+             $('#myModal6').hide();
+        };
+        
+      </script>
+
+
+{% endblock %}

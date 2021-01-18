@@ -1,0 +1,165 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>Geolocation</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <style>
+  div#lonLat{
+    display:none;
+  }
+  div#distance{
+    display:none;
+  }
+
+</style>
+</head>
+<body> 
+ 
+  <div id="tripmeter"> 
+    <div id="lonLat">
+    <p> 
+      <br/> 
+      <span id="startLat"></span>°, <span id="startLon"></span>°
+    </p> 
+    <p> 
+      <br/> 
+      <span id="currentLat"></span>°, <span id="currentLon"></span>°
+    </p> 
+  </div>
+  <div id="distance">
+    <p> 
+      <span id="distance"></span>
+    </p> 
+  </div>
+    <p>
+      <span id="walk"></span> 
+      </p>
+
+  </div> 
+ 
+  <script> 
+    var global_lat;
+    var global_lon;
+    var fox_lat = 36.974459;
+    var fox_lon = 127.872354;
+    var ghostcastle_lat = 36.96626801073573;
+    var ghostcastle_lon = 127.87404887820527;
+    var lime_lat = 36.96531700143226;
+    var lime_lon = 127.87103704999606;
+    var pop_lat = 36.96525529236092;
+    var pop_lon = 127.87177184717017;
+    var skybridge_lat = 36.96523941580824;
+    var skybridge_lon = 127.87147971190117;
+    var ocelot_lat = 36.964775615484484;
+    var ocelot_lon = 127.87144635271049;
+    
+    // PC방의 거리 변수 
+    if(name == "fox") {
+      global_lat=fox_lat;
+      global_lon=fox_lon;
+    } else if(name == "lime"){
+      global_lat=lime_lat;
+      global_lon=lime_lon;
+    } else if(name == "ghostcastle"){
+      global_lat=ghostcastle_lat;
+      global_lon=ghostcastle_lon;
+    } else if(name == "pop"){
+      global_lat=pop_lat;
+      global_lon=pop_lon;
+    } else if(name == "skybridge"){
+      global_lat=skybridge_lat;
+      global_lon=skybridge_lon;
+    } else if(name == "ocelot"){
+      global_lat=ocelot_lat;
+      global_lon=ocelot_lon;
+    }  
+
+    window.onload = function() {
+    
+      var startPos;
+       
+      if (navigator.geolocation) { 
+        navigator.geolocation.getCurrentPosition(function(position) {
+          startPos = position;
+          document.getElementById("startLat").innerHTML = global_lat;
+          document.getElementById("startLon").innerHTML = global_lon;
+        }, function(error) {
+          alert("Error occurred. Error code: "+error.code);
+       
+        });
+    
+        navigator.geolocation.watchPosition(function(position) {
+          document.getElementById("currentLat").innerHTML = position.coords.latitude;
+          document.getElementById("currentLon").innerHTML = position.coords.longitude;
+          document.getElementById("distance").innerHTML =
+            calculateDistance( global_lat, global_lon,
+                              position.coords.latitude, position.coords.longitude);
+          document.getElementById("walk").innerHTML = getTimeHTML(d);
+        });
+      }
+    };
+    var d;
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      var R = 6371; // km
+      var dLat = (lat2-lat1).toRad();
+      var dLon = (lon2-lon1).toRad(); 
+      var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+              Math.sin(dLon/2) * Math.sin(dLon/2); 
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      d = R * c;
+      return d;
+    }
+    Number.prototype.toRad = function() {
+      return this * Math.PI / 180;
+    }
+    
+    //자전거 도보
+    function getTimeHTML(d) {
+
+// 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
+var walkkTime = (1000 * d) / 67 | 0;
+var walkHour = '', walkMin = '';
+
+// 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
+if (walkkTime > 60) {
+    walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
+}
+walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+
+// 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
+var bycicleTime = (1000 * d) / 227 | 0;
+var bycicleHour = '', bycicleMin = '';
+
+// 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
+if (bycicleTime > 60) {
+    bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+}
+bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
+
+var md ='', kmd = '';
+
+if ((1000 * d) > 1000) {
+  kmd = '<span class="number">' + Math.floor((1000 * d) / 1000) + '</span>km '
+}
+md = '<span class="number">' + (1000 * d.toFixed(3)) % 1000 + '</span>m'
+
+// 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
+var content = '<p class="dotOverlay distanceInfo">';
+content += '    <p>';
+content += '        <span class="label">총 거리 : </span><span class="number">' + kmd + md;
+content += '    <p>';
+content += '        <span class="label">도보 : </span>' + walkHour + walkMin;
+content += '    <p>';
+content += '        <span class="label">자전거 : </span>' + bycicleHour + bycicleMin;
+content += '<p>'
+return content;
+
+}
+  </script> 
+  
+  <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" button type="button" class="btnna" onClick="location.href='/{{name}}/'"></button>
+    PC방 정보
+      </span>
+</body>
+</html>

@@ -1,0 +1,7 @@
+.darkmode--activated p, .darkmode--activated li {
+    color: #000;
+  }
+  
+  .darkmode--activated .logo {
+    mix-blend-mode: difference;
+  }

@@ -1,0 +1,83 @@
+{% extends "Proj/base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta mane='viewport' content="width=device-width, initial-scale=1"
+<link rel="stylesheet" href="/media/css/bootstrap.css">
+
+<div class="container">
+<br>
+{% if bn != 2 %}
+<form action="/board/{{bn}}/search/" method='post'>
+{% csrf_token %}
+{{ form }}
+<input type='submit' value='검색' />
+</form>
+{% endif %}
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        {% if bn == 1 %}
+        <th>별점</th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% if data %}
+    {% for data in data %}
+    <tr>
+        <td>{{ data.id }}</td>
+        <td><a href="/board/{{bn}}/{{data.id}}">{{ data.text_title }}</a></td>
+        {% if bn == 1 %}
+        <td>{{ data.star }}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+      <td>None</td>
+      <td>게시글이 없습니다.</td>
+      <td>None</td>
+  </tr>
+    {% endif %}
+    </tbody>
+</table>
+<hr>
+<style>
+    p{
+        text-align: right;
+    }
+</style>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+{% if bn == 1 %}
+<form action="/board/{{bn}}/" method='post'>
+{% csrf_token %}
+<!--<input type="submit" value="별점 높은 순으로 보기" />-->
+<input type="submit" value="별점 높은 순으로 보기"/>
+</form>
+{% endif %}
+<p><input type="button" class='btn btn-secondary' value="글쓰기" onclick="window.open('/board/write','window팝업','width=350px, height=800px, left=600, menubar=no, status=no, toolbar=no');">
+</p>
+
+</div>
+
+
+{% endblock %}
+
+

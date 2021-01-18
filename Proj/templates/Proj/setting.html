@@ -1,0 +1,44 @@
+{% extends "Proj/main.html" %}
+{% block content %}
+<h3>
+
+<form action="{% url 'proj:setting' %}" method='post'>
+    {% csrf_token %}
+    <h2>PC 시간 설정</h2>
+    {{ form.as_p }}
+    <input type='submit' value='시간 설정' />
+</form>
+
+{% endblock %}
+
+<!--darkmode-->
+
+
+{% if request.session.time <= time %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+</head>
+<body>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <div id="myMoney"></div>
+  <script>
+      jQuery(document).ready(function(){
+        $('#myMoney').show();
+    });
+    {
+      toastr.options.escapeHtml = true;
+      toastr.options.closeButton = true;
+      toastr.options.newestOnTop = false;
+      toastr.options.progressBar = true;
+      toastr.info('PC방 이용시간이 부족합니다', '충전 알림', {timeOut: 10000});
+    };
+  
+  </script>
+</body>
+</html>
+{% endif %}

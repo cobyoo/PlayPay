@@ -1,0 +1,113 @@
+{% extends "Proj/base.html" %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% block content %}
+<style>
+#login .container #login-row #login-column #login-box {
+  margin-top: 100px;
+  max-width: 600px;
+  height: 560px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+    
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */                          
+  }  
+</style>
+<script src="https://code.jquery.com/jquery-latest.js"></script> 
+ 
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">회원가입 안내문</span></b></span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;"><b>성별</b></span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">남자 : 0</span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">여자 : 1</span></p><br>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;"><b>하루 평균 PC방 이용시간</b></span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">0~2시간 : 0</span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">10~12시간 : 1</span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">2~4시간 : 2</span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">4~6시간 : 3</span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">6~8시간 : 4</span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">8~10시간 : 5</span></p><br>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;"><b>음식주문여부</b></span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">주문하지 않음 : 0</span></p>
+                <p style="text-align: center; line-height: 1;"><span style="font-size: 14pt;">주문함 : 1</span></p>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
+                <span class="pop_bt" style="font-size: 13pt;" >
+                     닫기
+                </span>
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
+ 
+ 
+    <script type="text/javascript">
+      
+        jQuery(document).ready(function() {
+                $('#myModal').show();
+        });
+        //팝업 Close 기능
+        function close_pop(flag) {
+             $('#myModal').hide();
+        };
+        
+      </script>
+<body>
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post" style="text-align:center">
+                            <h3 class="text-center text-info">Join</h3>
+                            <form action="{% url 'proj:join' %}" method='post' >
+                                {% csrf_token %}
+                           
+                                    {% for field in form %}
+                                <div class="form-group">
+                                    <input type="{{field.field.widget.input_type}}" class="form-control" id="{{field.id_for_label}}" 
+                                        placeholder="{{field.label}}" name="{{field.name}}">
+                                </div>
+                            {% endfor %}    
+                                <input type='submit' class='btn btn-warning' value='회원가입' />
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
